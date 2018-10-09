@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8"/>     
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="msapplication-tap-highlight" content="no" />
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
+    <!-- This is a wide open CSP declaration. To lock this down for production, see below. -->
+    <meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline' gap:; style-src 'self' 'unsafe-inline'; media-src *" />
+
+    <title>iMedic</title>
+
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic">
+    <link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Advent+Pro">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Amatic+SC">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Cinzel+Decorative">
+    <link rel="stylesheet" href="assets/css/Contact-Form-Clean.css">
+    <link rel="stylesheet" href="assets/css/Features-Blue.css">
+    <link rel="stylesheet" href="assets/css/Login-Form-Clean.css">
+    <link rel="stylesheet" href="assets/css/Projects-Horizontal.css">
+    <link rel="stylesheet" href="assets/css/Registration-Form-with-Photo.css">
+
+<link rel="stylesheet" href="./bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="./bootstrap/css/sweetalert.css">
+<script src="./bootstrap/js/sweetalert.min.js"></script> 
+<script src="./bootstrap/js/jquery.min.js"></script>
+<script src="./bootstrap/js/bootstrap.min.js"></script>
+<script src="./bootstrap/js/bootbox.js"></script>
+</head>
+
+<body id="page-top"><a href="#" class="menu-toggle rounded"><i class="fa fa-bars"></i></a>
+    <nav class="navbar navbar-light navbar-expand" id="sidebar-wrapper">
+        <div class="container"><button class="navbar-toggler d-none" data-toggle="collapse" data-target="#"></button>
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav sidebar-nav" id="sidebar-nav">
+                    <li class="nav-item sidebar-brand" role="presentation"><a class="nav-link active js-scroll-trigger" href="index.html">iMedic</a></li>
+                    <li class="nav-item sidebar-nav-item" role="presentation"><a class="nav-link js-scroll-trigger" href="Consultas.html">Programar Consultas</a></li>
+                    <li class="nav-item sidebar-nav-item" role="presentation"><a class="nav-link js-scroll-trigger" href="Consejos.html">Consejos</a></li>
+                    <li class="nav-item sidebar-nav-item" role="presentation"><a class="nav-link js-scroll-trigger" href="Cita.html">Cita</a></li>
+                    <li class="nav-item sidebar-nav-item" role="presentation"><a class="nav-link js-scroll-trigger" href="Preguntas.html">Preguntas</a></li>
+                    <li class="nav-item sidebar-nav-item" role="presentation"><a class="nav-link js-scroll-trigger" href="Contactanos.html">Contáctanos</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+  
+        <style type="text/css">
+          .div_wait 
+          {
+              display: none;
+              position: fixed;
+              left: 0px;
+              top: 0px;
+              width: 100%;
+              height: 100%;
+              z-index: 9999;
+              background-color: black;
+              opacity:0.5;
+              background: url(./img/wait.gif) center no-repeat #fff;
+            }
+
+        </style>
+
+      <script type="text/javascript">
+         $(document).ready(function ()
+         {
+                     $('.Consulta').click(function()     
+                    {
+                              var esp=document.getElementById("esp").value; 
+                              var ide=$("#id").val(); 
+                              var fecha=$("#fecha").val();    
+                              var hora=$("#hora").val();  
+                              var mail=$("#mail").val();  
+                              var tel=$("#tel").val();  
+
+                              var esp = esp.trim(); 
+                              var ide = ide.trim(); 
+                              var fecha = fecha.trim(); 
+                              var hora = hora.trim(); 
+                              var mail = mail.trim(); 
+                              var tel = tel.trim(); 
+                               
+                                 if (esp=== '' || fecha=== '' || hora==='' || mail==='' || tel==='' || ide==='')
+                                 {
+                                      swal("Error...!", "Seleccione todos los campos necesarios para la consulta!", "error");
+                                 }
+                                  else
+                                 {
+                                $(".div_wait").fadeIn("fast"); 
+                                  var urr = 'http://181.210.25.211:8999/imed/_save_consulta.php?esp='+esp+'&fecha='+fecha+'&hora='+hora+'&mail='+mail+'&tel='+tel+'&ide='+ide+'&valida='+Math.random();                             
+                                  $("#info_sorteo").load(urr); 
+
+                                   document.getElementById('esp').value="";
+                                   document.getElementById('id').value="";
+                                   document.getElementById('fecha').value="";
+                                   document.getElementById('hora').value="";
+                                   document.getElementById('mail').value="";
+                                   document.getElementById('tel').value="";                          
+                                 }
+                    });
+
+
+          });
+
+        </script>
+    
+   <div id="info_sorteo"></div>
+   <div id="div_wait" class="div_wait"></div>
+        <div class="container" style="background-image: url(&quot;assets/img/fondo11.jpg&quot;);" >    
+            <div class="row">
+                        <div class="col-sm-12" style="">
+                            <div class="card" style="margin-top: 10px;">
+                                <div class="card-header" style="background-color: rgba(57,210,64,0.5);">
+                                    <h5 class="text-center text-white">Solicitud de Consulta</h5>
+                                </div>
+                                <div class="card-body">
+                                        <div class="group">  
+                                                 <select class="form-control" id="esp">
+                                            <option value="">Seleccione una especialidad</option>
+                                            <option value="general">Medicina general</option>
+                                            <option value="Cardiología">Cardiología</option>
+                                            <option value="Ginecología"> Ginecología</option>
+                                            <option value="Oftalmología">Oftalmología</option>
+                                            <option value="Pediatria">Pediatria</option>
+                                            </select >
+                                            <span class="highlight"></span>
+                                            <span class="bar"></span>
+                                        </div>
+                                    <div class="col" style="margin-top: 44px;"><span> Identidad : &nbsp;</span><input type="text" id="id" class="form-control"></div>
+                                    <div class="col" style="margin-top: 44px;"><span>Fecha de Solicitud&nbsp;</span><input type="date" id="fecha" class="form-control"></div>
+                                    <div class="col" style="margin-top: 27px;"><span>Hora de Solicitud &nbsp;&nbsp;</span><input type="time" id="hora" class="form-control"></div>
+                                    <div class="col" style="margin-top: 27px;"><span>Correo electrónnico &nbsp;&nbsp;</span><input type="mail"  id="mail" class="form-control"></div>
+                                    <div class="col" style="margin-top: 27px;"><span>Teléfono</span><input type="text" id="tel" class="form-control"></div><br>
+                                    <button class="Consulta btn btn-info active btn-block float-left justify-content-center" type="button"
+                                        style=";">Solicitar Consulta<i class="fa fa-heartbeat" style="width: 33px;"></i></button>
+                                </div>
+                            </div>
+                        </div> 
+            </div> 
+        </div>
+ 
+    <footer class="footer text-center">
+        <div class="container">
+            <p class="text-muted mb-0 small">Copyright &nbsp;© iMedic 2018</p>
+        </div><a href="#page-top" class="js-scroll-trigger scroll-to-top rounded"><i class="fa fa-angle-up"></i></a></footer>
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+    <script src="assets/js/stylish-portfolio.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+</body>
+
+</html>

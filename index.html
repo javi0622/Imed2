@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<!--
+    Copyright (c) 2012-2016 Adobe Systems Incorporated. All rights reserved.
+
+    Licensed to the Apache Software Foundation (ASF) under one
+    or more contributor license agreements.  See the NOTICE file
+    distributed with this work for additional information
+    regarding copyright ownership.  The ASF licenses this file
+    to you under the Apache License, Version 2.0 (the
+    "License"); you may not use this file except in compliance
+    with the License.  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing,
+    software distributed under the License is distributed on an
+    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+     KIND, either express or implied.  See the License for the
+    specific language governing permissions and limitations
+    under the License.
+-->
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="msapplication-tap-highlight" content="no" />
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
+    <!-- This is a wide open CSP declaration. To lock this down for production, see below. -->
+    <meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline' gap:; style-src 'self' 'unsafe-inline'; media-src *" />
+    <!-- Good default declaration:
+    * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
+    * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
+    * Disables use of eval() and inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
+        * Enable inline JS: add 'unsafe-inline' to default-src
+        * Enable eval(): add 'unsafe-eval' to default-src
+    * Create your own at http://cspisawesome.com
+    -->
+    <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: 'unsafe-inline' https://ssl.gstatic.com; style-src 'self' 'unsafe-inline'; media-src *" /> -->
+
+
+<link rel="stylesheet" href="./bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="./bootstrap/css/sweetalert.css">
+<script src="./bootstrap/js/sweetalert.min.js"></script> 
+<script src="./bootstrap/js/jquery.min.js"></script>
+<script src="./bootstrap/js/bootstrap.min.js"></script>
+<script src="./bootstrap/js/bootbox.js"></script>
+<title>iMedic</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic">
+    <link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Advent+Pro">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Amatic+SC">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Cinzel+Decorative">
+    <link rel="stylesheet" href="assets/css/Contact-Form-Clean.css">
+    <link rel="stylesheet" href="assets/css/Features-Blue.css">
+    <link rel="stylesheet" href="assets/css/Login-Form-Clean.css">
+    <link rel="stylesheet" href="assets/css/Projects-Horizontal.css">
+    <link rel="stylesheet" href="assets/css/Registration-Form-with-Photo.css">
+
+    
+    <title>PANI</title>
+
+    <script type="text/javascript">
+ $(document).ready(function ()
+ {
+             $('.Consulta').click(function()     
+            {   
+              var sorteo=$("#selectsorteo").val(); 
+              var numero=$("#txtnumero").val();    
+              var serie=$("#txtserie").val();    
+             // alert(val+"--"+sorteo+"--"+numero+"--"+serie+"--"+registro+"--"+total+"--"+impto+"--"+neto);
+                 if (sorteo== '' || numero== '' || serie=='')
+                 {
+                      swal("Error...!", "Seleccione todos los campos necesarios para la consulta!", "error");
+                 }
+                  else
+                 {
+                     
+                   /* $.ajax({
+                            type:'POST',
+                            //url:'getData.php',
+                            url:'_pp_consulta_menor_app.php',
+                            dataType: "json",
+                            //data:{user_id:user_id},
+                            data:{sorteo_app : sorteo  , _app : sorteo , sorteo_app : sorteo },
+                            success:function(data){
+                                if(data.status == 'ok'){
+                                    $('#userName').text(data.result.name);                    
+                                    $('.user-content').slideDown();
+                                }else{
+                                    $('.user-content').slideUp();
+                                    alert("User not found...");
+                                } 
+                            }
+                        });
+
+
+
+
+                        $.ajax
+                      ({
+                           url:'_pp_consulta_menor_app.php',
+                           type:'POST',                           
+                           dataType: 'json',
+                           data: {sorteo: sorteo},
+                          success: function(data)
+                          {
+                            if(data.status == 'ok')
+                            {
+                              $('#info_sorteo').html(data);
+                              alert();
+                            }
+                          } ,
+                          error: function()
+                          {
+                              $('#info_sorteo').html("Error");
+                          }
+                      });
+                      /* data: {
+                                       'sorteo': + sorteo+ , 
+                                       'numero': + numero+ , 
+                                       'serie': + serie
+                                 },*/
+
+                      var urr = 'http://181.210.25.211:8990/APP_CONSULTA/_pp_consulta_menor_app.php?sorteo='+sorteo+'&numero='+numero+'&serie='+serie+'&valida='+Math.random();
+
+                    //  var urr = 'http://192.168.15.6/APP_CONSULTA/_pp_consulta_menor_app.php?sorteo='+sorteo+'&numero='+numero+'&serie='+serie+'&valida='+Math.random();
+                      $("#info_sorteo").load(urr); 
+                      alert(urr);
+                 }
+
+            });
+
+
+             $('.ConsultaMayor').click(function()     
+            {   
+                  var sorteo=$("#selectsorteomayor").val(); 
+                  var numero=$("#txtnumeromayor").val();    
+
+                   if (sorteo == '' || numero== '')
+                   {
+                        swal("Error...!", "Seleccione todos los campos necesarios para la consulta!", "error");
+                   }
+                    else
+                   {
+                       var urr = '_pp_consulta_mayor_app.php?sorteo='+sorteo+'&numero='+numero+'&valida='+Math.random();                   
+                       $("#info_sorteo_mayor").load(urr);       
+                   }
+            });
+  });
+
+</script>
+</head>
+
+<body id="page-top"><a href="#" class="menu-toggle rounded"><i class="fa fa-bars"></i></a>
+    <nav class="navbar navbar-light navbar-expand" id="sidebar-wrapper">
+        <div class="container"><button class="navbar-toggler d-none" data-toggle="collapse" data-target="#"></button>
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav sidebar-nav" id="sidebar-nav">
+                    <li class="nav-item sidebar-brand" role="presentation"><a class="nav-link active js-scroll-trigger" href="index.html">iMedic</a></li>
+                    <li class="nav-item sidebar-nav-item" role="presentation"><a class="nav-link js-scroll-trigger" href="Consultas.html">Consultas</a></li>
+                    <li class="nav-item sidebar-nav-item" role="presentation"><a class="nav-link js-scroll-trigger" href="Consejos.html">Consejos</a></li>
+                    <li class="nav-item sidebar-nav-item" role="presentation"><a class="nav-link js-scroll-trigger" href="Cita.html">Cita</a></li>
+                    <li class="nav-item sidebar-nav-item" role="presentation"><a class="nav-link js-scroll-trigger" href="Preguntas.html">Preguntas</a></li>
+                    <li class="nav-item sidebar-nav-item" role="presentation"><a class="nav-link js-scroll-trigger" href="Contactanos.html">Contáctanos</a></li>
+                 
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <header class="d-flex masthead" style="background-image: url(&quot;assets/img/fondo3.jpg&quot;);height: 766px;">
+        <div class="container my-auto text-center">
+            <h1 class="mb-1" style="font-family: 'Cinzel Decorative', cursive;margin-top: 110px;">iMedic</h1>
+            <h3 class="mb-5"></h3><a class="btn btn-primary btn-xl js-scroll-trigger" role="button" href="#about" style="background-color: rgba(29,128,159,0.6);width: 156px;height: 61px;"><i class="fa fa-user-md" style="margin-left: -41px;width: 34px;height: 8px;"></i>Sobre nosotros</a>
+            <div
+                class="overlay"></div>
+        </div>
+    </header>
+    <section id="about" class="content-section bg-light">
+        <div class="container text-center">
+            <div class="row">
+                <div class="col-lg-10 mx-auto">
+                    <h2>iMedic</h2>
+                    <p class="lead mb-5"><span><br>Somos una institución hospitalaria integrada por especialistas de diferentes áreas de la medicina, contando con internamiento,&nbsp;área de cirugía, laboratorio, ultrasonido, imagenología, farmacia, etc.&nbsp;<span style="text-decoration: underline;">Todo a su servicio las 24 horas del día</span>tanto
+                        al público en general, empresas y seguros de gastos médicos.&nbsp;<br>Con esta aplicación podrás hacer solicitudes de consulta, ver tu última cita y obtener información acerca de nuestro centro médico.<br><br><br></span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer class="footer text-center">
+        <div class="container">
+            <p class="text-muted mb-0 small" style="margin-top: -67px;">Copyright &nbsp;© iMedic 2018</p>
+        </div>
+    </footer>
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+    <script src="assets/js/stylish-portfolio.js"></script>
+</body>
+
+</html>
